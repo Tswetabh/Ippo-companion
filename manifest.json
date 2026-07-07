@@ -1,0 +1,21 @@
+{
+  "name": "CampusFlow",
+  "short_name": "CampusFlow",
+  "description": "AI-powered Student Operating System for managing classes, assignments, and study sessions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1326",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

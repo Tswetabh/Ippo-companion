@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusFlow - AI Agents</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-container": "#e7eefe",
+                        "surface-container-low": "#f0f3ff",
+                        "background": "#f9f9ff",
+                        "surface-tint": "#005ac2",
+                        "on-primary-fixed": "#001a42",
+                        "primary-container": "#2170e4",
+                        "on-background": "#151c27",
+                        "tertiary-container": "#00855b",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary": "#006947",
+                        "inverse-surface": "#2a313d",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-dim": "#d3daea",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-container": "#8455ef",
+                        "surface-variant": "#dce2f3",
+                        "on-surface-variant": "#424754",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#23005c",
+                        "outline-variant": "#c2c6d6",
+                        "on-tertiary-container": "#f5fff6",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "outline": "#727785",
+                        "inverse-on-surface": "#ebf1ff",
+                        "secondary": "#6b38d4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#adc6ff",
+                        "primary": "#0058be",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#151c27",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-primary-container": "#fefcff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-highest": "#dce2f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "sidebar-width": "260px",
+                        "max-width": "1440px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "title-md": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        .pulse-green { animation: pulseGreen 2s infinite; }
+        @keyframes pulseGreen {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 133, 91, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 133, 91, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 133, 91, 0); }
+        }
+        .pulse-purple { animation: pulsePurple 2s infinite; }
+        @keyframes pulsePurple {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(132, 85, 239, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(132, 85, 239, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(132, 85, 239, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- Side Nav -->
+<nav class="hidden md:flex flex-col h-screen w-sidebar-width py-margin-desktop px-4 gap-unit bg-surface-container border-r border-outline-variant backdrop-blur-xl bg-opacity-70 fixed left-0 top-0">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xl">
+                C
+            </div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight" style="font-size: 20px; line-height: 28px;">CampusFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Academic OS</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-lg py-2 mb-6 font-title-md text-title-md flex items-center justify-center gap-2 hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+            New Task
+        </button>
+<ul class="flex flex-col gap-1 w-full flex-grow">
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span> Planner</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="fact_check">fact_check</span> Attendance</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="schedule">schedule</span> Timetable</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="assignment">assignment</span> Assignments</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-high rounded-lg transition-all duration-200 ease-in-out scale-95 transition-transform" href="#"><span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span> AI Agents</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="timer">timer</span> Study Sessions</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="analytics">analytics</span> Analytics</a></li>
+</ul>
+<div class="mt-auto pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out hover:bg-surface-variant/50" href="#"><span class="material-symbols-outlined" data-icon="settings">settings</span> Settings</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-sidebar-width flex flex-col min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center h-16 px-margin-desktop bg-surface/70 backdrop-blur-md bg-opacity-70 docked full-width top-0 sticky z-10">
+<div class="flex items-center gap-4 w-full max-w-md">
+<!-- Mobile Menu Toggle (Visible only on mobile) -->
+<button class="md:hidden text-on-surface-variant p-2 -ml-2 rounded-lg hover:bg-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-[12px] font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant/50 focus:ring-2 focus:ring-primary ring-offset-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant/50 focus:ring-2 focus:ring-primary ring-offset-2">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer focus:ring-2 focus:ring-primary ring-offset-2">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close up, highly detailed professional headshot of a young college student with short hair, wearing a clean, modern navy blue crewneck sweater. The lighting is soft and natural, typical of a bright, minimalist light-mode user interface. The background is a very subtle, out-of-focus light gray. The image feels clean, approachable, and suited for a premium SaaS application profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACVmatKxhkN4-zsjVsvpp4wey0Z7D1ak_qkodkBn9CXPnT5SQk5cZYl-KxgSThSOe-Cm82l0WHKG4KTV1ewvnairyci-sxbNpYmSWQh4jBFrkBBMe5uFvMn5giANl56OYBQ7QTkWG-rBSJtp2f4aK3FItwPnAkcOjmOZ_ioXntdtu5AavyxKgos2LXjr0aGR9iaAFPvbnzrYFfL4prbXYbLXzH3pKzZnxGzs29n0e8-eth5-qprY7NLOVa_SeC5vBhzVAbCyvF_C4"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-margin-desktop pt-8 w-full max-w-max-width mx-auto flex-1">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2 hidden md:block">AI Agents Panel</h2>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2 block md:hidden">AI Agents Panel</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage and monitor your dedicated academic assistants.</p>
+</div>
+<!-- Bento Grid / Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Planner Agent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary-container/10 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" style="font-size: 28px;">smart_toy</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-outline-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary pulse-green"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active</span>
+</div>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1 relative z-10">Planner Agent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 h-10">Optimizing your week and rescheduling conflicts.</p>
+<!-- Sparkline Placeholder (CSS SVG) -->
+<div class="w-full h-12 mb-6 border-b border-outline-variant/30 flex items-end justify-between px-1 relative z-10">
+<div class="w-[14%] bg-tertiary/20 rounded-t-sm" style="height: 40%"></div>
+<div class="w-[14%] bg-tertiary/40 rounded-t-sm" style="height: 60%"></div>
+<div class="w-[14%] bg-tertiary/30 rounded-t-sm" style="height: 50%"></div>
+<div class="w-[14%] bg-tertiary/60 rounded-t-sm" style="height: 80%"></div>
+<div class="w-[14%] bg-tertiary/80 rounded-t-sm" style="height: 70%"></div>
+<div class="w-[14%] bg-tertiary rounded-t-sm" style="height: 90%"></div>
+</div>
+<div class="flex gap-3 relative z-10">
+<button class="flex-1 bg-surface-container text-on-surface py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Settings</button>
+<button class="flex-1 bg-surface-container-lowest border border-outline text-on-surface py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Logs</button>
+</div>
+</div>
+<!-- Academic Agent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" style="font-size: 28px;">school</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-outline-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ready</span>
+</div>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1 relative z-10">Academic Agent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 h-10">Ask me about your syllabus or assignment specs.</p>
+<!-- Sparkline Placeholder (CSS SVG) -->
+<div class="w-full h-12 mb-6 border-b border-outline-variant/30 flex items-end justify-between px-1 relative z-10">
+<div class="w-[14%] bg-primary/10 rounded-t-sm" style="height: 20%"></div>
+<div class="w-[14%] bg-primary/10 rounded-t-sm" style="height: 10%"></div>
+<div class="w-[14%] bg-primary/20 rounded-t-sm" style="height: 30%"></div>
+<div class="w-[14%] bg-primary/10 rounded-t-sm" style="height: 20%"></div>
+<div class="w-[14%] bg-primary/30 rounded-t-sm" style="height: 40%"></div>
+<div class="w-[14%] bg-primary/20 rounded-t-sm" style="height: 25%"></div>
+</div>
+<div class="flex gap-3 relative z-10">
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-tint transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 16px;">chat</span> Chat
+                        </button>
+</div>
+</div>
+<!-- Attendance Agent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error-container/20 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" style="font-size: 28px;">fact_check</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-outline-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Monitoring</span>
+</div>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1 relative z-10">Attendance Agent</h3>
+<p class="font-body-md text-body-md text-error mb-6 relative z-10 h-10 font-medium">2 alerts found. Risk of dropping below 80%.</p>
+<!-- Sparkline Placeholder (CSS SVG) -->
+<div class="w-full h-12 mb-6 border-b border-outline-variant/30 flex items-end justify-between px-1 relative z-10">
+<div class="w-[14%] bg-outline/20 rounded-t-sm" style="height: 100%"></div>
+<div class="w-[14%] bg-outline/20 rounded-t-sm" style="height: 100%"></div>
+<div class="w-[14%] bg-outline/20 rounded-t-sm" style="height: 100%"></div>
+<div class="w-[14%] bg-error/40 rounded-t-sm" style="height: 60%"></div>
+<div class="w-[14%] bg-outline/20 rounded-t-sm" style="height: 100%"></div>
+<div class="w-[14%] bg-error/60 rounded-t-sm" style="height: 40%"></div>
+</div>
+<div class="flex gap-3 relative z-10">
+<button class="flex-1 bg-error-container text-on-error-container py-2 rounded-lg font-label-sm text-label-sm hover:bg-error-container/80 transition-colors">View Alerts</button>
+</div>
+</div>
+<!-- Task Agent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-size: 28px;">task_alt</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-outline-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary pulse-purple"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Processing</span>
+</div>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1 relative z-10">Task Agent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 h-10">5 tasks automated from recent emails.</p>
+<!-- Sparkline Placeholder (CSS SVG) -->
+<div class="w-full h-12 mb-6 border-b border-outline-variant/30 flex items-end justify-between px-1 relative z-10">
+<div class="w-[14%] bg-secondary/10 rounded-t-sm" style="height: 10%"></div>
+<div class="w-[14%] bg-secondary/30 rounded-t-sm" style="height: 30%"></div>
+<div class="w-[14%] bg-secondary/20 rounded-t-sm" style="height: 20%"></div>
+<div class="w-[14%] bg-secondary/50 rounded-t-sm" style="height: 50%"></div>
+<div class="w-[14%] bg-secondary/80 rounded-t-sm" style="height: 80%"></div>
+<div class="w-[14%] bg-secondary rounded-t-sm" style="height: 95%"></div>
+</div>
+<div class="flex gap-3 relative z-10">
+<button class="flex-1 bg-surface-container text-on-surface py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Review Tasks</button>
+</div>
+</div>
+<!-- Recommendation Agent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors shadow-[0_8px_30px_rgba(0,0,0,0.04)] md:col-span-2 lg:col-span-1">
+<div class="absolute top-0 right-0 w-32 h-32 bg-outline-variant/10 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" style="font-size: 28px;">lightbulb</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1 rounded-full border border-outline-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Idle</span>
+</div>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1 relative z-10">Recommendation Agent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 relative z-10 h-10">New study material insights ready.</p>
+<!-- Sparkline Placeholder (CSS SVG) -->
+<div class="w-full h-12 mb-6 border-b border-outline-variant/30 flex items-end justify-between px-1 relative z-10">
+<div class="w-[14%] bg-outline/10 rounded-t-sm" style="height: 5%"></div>
+<div class="w-[14%] bg-outline/10 rounded-t-sm" style="height: 10%"></div>
+<div class="w-[14%] bg-outline/10 rounded-t-sm" style="height: 5%"></div>
+<div class="w-[14%] bg-outline/10 rounded-t-sm" style="height: 5%"></div>
+<div class="w-[14%] bg-outline/20 rounded-t-sm" style="height: 15%"></div>
+<div class="w-[14%] bg-outline/10 rounded-t-sm" style="height: 5%"></div>
+</div>
+<div class="flex gap-3 relative z-10">
+<button class="flex-1 bg-surface-container-lowest border border-outline text-on-surface py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-variant transition-colors">View Insights</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# next
+.next
+out
+
+# environment
+.env.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
