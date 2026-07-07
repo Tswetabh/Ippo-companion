@@ -1,8 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Ippo</h1>
-      <p>AI-powered Student Operating System</p>
-    </main>
-  );
+  redirect("/dashboard");
 }
