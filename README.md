@@ -1,12 +1,5 @@
 # Ippo companion
 
-THE NAME "IPPO COMPANION"?
-The name Ippo comes from the Japanese word 一歩 (ippo), meaning "one step."
-The idea behind the project is that students don't need an AI that just hands them answers — they need a companion that helps them take the next step in their academic journey, whether that's planning a study session, improving attendance, preparing for an exam, or organizing assignments.
-
-"Companion" reflects the system's role as an always-available academic assistant, not just another chatbot. Rather than making decisions for the student, Ippo guides them by coordinating specialized agents to provide timely, context-aware help.
-Together, Ippo Companion represents an AI partner that helps students move one step closer to their academic goals, one task at a time.
-AI-powered Student Operating System built with Next.js, Gemini, Firebase, and a multi-agent architecture for academic planning and productivity.
 ```mermaid
 graph TD
 
@@ -65,7 +58,13 @@ graph TD
 Ippo is an AI-powered Student Operating System that brings together the scattered tools students rely on—timetables, assignments, attendance tracking, notes, and study planning—into a single platform.
 
 Instead of acting as a generic chatbot, Ippo uses a **multi-agent architecture** where specialized agents collaborate behind a single conversational interface to solve academic tasks.
+THE NAME "IPPO COMPANION"?
+The name Ippo comes from the Japanese word 一歩 (ippo), meaning "one step."
+The idea behind the project is that students don't need an AI that just hands them answers — they need a companion that helps them take the next step in their academic journey, whether that's planning a study session, improving attendance, preparing for an exam, or organizing assignments.
 
+"Companion" reflects the system's role as an always-available academic assistant, not just another chatbot. Rather than making decisions for the student, Ippo guides them by coordinating specialized agents to provide timely, context-aware help.
+Together, Ippo Companion represents an AI partner that helps students move one step closer to their academic goals, one task at a time.
+AI-powered Student Operating System built with Next.js, Gemini, Firebase, and a multi-agent architecture for academic planning and productivity.
 ---
 
 # ✨ Features
